@@ -84,6 +84,18 @@ class Scanner {
                     while (peek() != '\n' && !isAtEnd()) {
                         advance();
                     }
+                } else if (match('*')) {
+                    while (!isAtEnd() && !(peek() == '*' && peekNext() == '/')) {
+                        if (peek() == '\n') {
+                            line++;
+                        }
+                        advance();
+                    }
+
+                    if (!isAtEnd()) {
+                        advance(); // the closing star
+                        advance(); // the closing slash
+                    }
                 } else {
                     addToken(SLASH);
                 }
@@ -107,7 +119,7 @@ class Scanner {
                 } else if (isAlpha(c)) {
                     identifier();
                 } else {
-                    Lox.error(line, "Unexpected character.");
+                    Lox.error(line, "Unexpected character '" + c + "'.");
                 }
                 break;
         }
