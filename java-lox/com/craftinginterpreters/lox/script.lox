@@ -1,0 +1,3 @@
+print "this is a valid script!";
+print 1+1;
+print 2+2;
