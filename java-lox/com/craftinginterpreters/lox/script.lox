@@ -1,11 +1,6 @@
-// statements
 var a = 1;
-var b = 2;
-print a + b;
-
-// assignment
-print a = 4;
-b = 10;
-
-
-// c = 10; // assignment error
+{
+    var a = a + 2;
+    print a;
+}
+print a;
