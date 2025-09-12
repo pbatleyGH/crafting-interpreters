@@ -22,6 +22,26 @@ class Parser {
         return statements;
     }
 
+    private boolean allowExpression;
+    private boolean foundExpression = false;
+
+    Object parseRepl() {
+        allowExpression = true;
+        List<Stmt> statements = new ArrayList<>();
+        while (!isAtEnd()) {
+            statements.add(declaration());
+
+            if (foundExpression) {
+                Stmt last = statements.get(statements.size() - 1);
+                return ((Stmt.Expression) last).expression;
+            }
+
+            allowExpression = false;
+        }
+
+        return statements;
+    }
+
     private Stmt declaration() {
         try {
             if (match(VAR)) {
@@ -65,7 +85,13 @@ class Parser {
 
     private Stmt expressionStatement() {
         Expr expr = expression();
-        consume(SEMICOLON, "Expect ';' after value.");
+
+        // this check enables the repl to evaluate expressions
+        if (allowExpression && isAtEnd()) {
+            foundExpression = true;
+        } else {
+            consume(SEMICOLON, "Expect ';' after expression.");
+        }
         return new Stmt.Expression(expr);
     }
 
