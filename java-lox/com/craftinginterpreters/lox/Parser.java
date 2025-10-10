@@ -83,6 +83,16 @@ class Parser {
         if (match(FOR)) {
             return forStatement();
         }
+        // C9.3 we could add break statement here by:
+        // Add Stmt.Break + add TokenType BREAK
+        // Add match(BREAK) to parser here, returning breakStatement();
+        // This method checks loop nesting depth > 0, then returns new Stmt.Break();
+        // Visiting Stmt.Break throws a BreakException
+        // Wrap while loop interpreter in try catch (BreakException ex) {...}
+        // If a break statement is encountered, execution will resume after the body of
+        // the while loop
+        // Given that for is implemented through Stmt.While, this implements break for
+        // all loops
 
         return expressionStatement();
     }
