@@ -1,4 +1,6 @@
-print "hi" or "lo";
-print nil or "yoooo";
-print "hi" and "lo";
+
 if (1 > 10) print "hello"; else print "world";
+
+for(var i = 0; i < 10; i = i + 1) {
+    print i;
+}
