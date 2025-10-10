@@ -1,6 +1,4 @@
-var a = 1;
-{
-    var a = a + 2;
-    print a;
-}
-print a;
+print "hi" or "lo";
+print nil or "yoooo";
+print "hi" and "lo";
+if (1 > 10) print "hello"; else print "world";
