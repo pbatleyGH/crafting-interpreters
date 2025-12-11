@@ -73,7 +73,6 @@ class Parser {
     private Stmt.Function function(String kind) {
         Token name = consume(IDENTIFIER, "Expect " + kind + " name.");
 
-        // consume LEFT PAREN
         consume(LEFT_PAREN, "Expect '(' after " + kind + " name.");
         List<Token> parameters = new ArrayList<>();
 
@@ -109,6 +108,10 @@ class Parser {
         if (match(FOR)) {
             return forStatement();
         }
+        if (match(RETURN)) {
+            return returnStatement();
+        }
+
         // C9.3 we could add break statement here by:
         // Add Stmt.Break + add TokenType BREAK
         // Add match(BREAK) to parser here, returning breakStatement();
@@ -218,6 +221,18 @@ class Parser {
         }
 
         return body;
+    }
+
+    private Stmt returnStatement() {
+        Token keyword = previous();
+        Expr value = null;
+
+        if (!check(SEMICOLON)) {
+            value = expression();
+        }
+
+        consume(SEMICOLON, "Expect ';' after return value.");
+        return new Stmt.Return(keyword, value);
     }
 
     private Expr expression() {

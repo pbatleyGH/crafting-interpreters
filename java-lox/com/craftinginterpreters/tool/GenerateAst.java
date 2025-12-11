@@ -30,7 +30,8 @@ public class GenerateAst {
                 "While : Expr condition, Stmt body",
                 "Var : Token name, Expr initializer",
                 "Function : Token name, List<Token> params, List<Stmt> body",
-                "Print : Expr expression"));
+                "Print : Expr expression",
+                "Return : Token keyword, Expr value"));
     }
 
     private static void defineAst(String outputDir, String baseName, List<String> types) throws IOException {
