@@ -10,7 +10,7 @@ import com.craftinginterpreters.lox.Stmt.Function;
 class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     final Environment globals = new Environment();
-    private Environment environment = new Environment();
+    private Environment environment = globals;
     private static Object uninitialized = new Object();
 
     Interpreter() {
@@ -224,7 +224,7 @@ class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     @Override
     public Void visitFunctionStmt(Stmt.Function stmt) {
-        LoxFunction function = new LoxFunction(stmt);
+        LoxFunction function = new LoxFunction(stmt, environment);
         this.environment.define(
                 stmt.name.lexeme, function);
         return null;
