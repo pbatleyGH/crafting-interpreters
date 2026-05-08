@@ -1,24 +1,25 @@
-class Test {
+class SuperClass {
+    scramble_name() {}
+}
+
+class Person < SuperClass {
     class greet() {
         print "Hello!";
     }
 
-    class staticSelf() {
-        return this;
+    init(firstname, surname) {
+        this.firstname = firstname;
+        this.surname = surname;
     }
 
-    class init() {
-        print "Static init method called.";
-    }
-
-    init(name) {
-        this.name = name;
-    }
-
-    self() {
-        return this;
+    print_name() {
+        print this.firstname + " " + this.surname;
     }
 }
 
-print Test.staticSelf();
-print Test("Pete").self();
+Person.greet();
+
+var pete = Person("Pete", "Batley");
+pete.print_name();
+
+print Person.scramble_name();

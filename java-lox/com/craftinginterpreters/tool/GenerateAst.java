@@ -35,7 +35,7 @@ public class GenerateAst {
                 "Function : Token name, List<Token> params, List<Stmt> body",
                 "Print : Expr expression",
                 "Return : Token keyword, Expr value",
-                "Class : Token name, List<Stmt.Function> methods, List<Stmt.Function> staticMethods"));
+                "Class : Token name, Expr.Variable superclass, List<Stmt.Function> methods, List<Stmt.Function> staticMethods"));
     }
 
     private static void defineAst(String outputDir, String baseName, List<String> types) throws IOException {
