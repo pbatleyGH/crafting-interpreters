@@ -1,12 +1,7 @@
-class WHAAAAAT {
-  getCallback() {
-    fun localFunction() {
-      print this;
+class Test {
+    init() {
+        this.number = 400;
     }
-
-    return localFunction;
-  }
 }
 
-var callback = WHAAAAAT().getCallback();
-callback();
+print Test().number;
