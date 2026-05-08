@@ -3,13 +3,24 @@ package com.craftinginterpreters.lox;
 import java.util.List;
 import java.util.Map;
 
-class LoxClass implements LoxCallable {
+// thinking:
+// a class also has an instance of itself,
+//   what closure? presumably just the current env?
+// loop over any static (`class X`) methods and set them on the env
+
+// for parsing, the `classDeclaration` will need to know whether its inside a class already
+// maybe we just extend `method` for this?
+
+class LoxClass extends LoxInstance implements LoxCallable {
     final String name;
     private final Map<String, LoxFunction> methods;
 
-    LoxClass(String name, Map<String, LoxFunction> methods) {
+    LoxClass(String name, Map<String, LoxFunction> methods, LoxClass metaclass) {
+        super(metaclass);
+
         this.name = name;
         this.methods = methods;
+
     }
 
     @Override

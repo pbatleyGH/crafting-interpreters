@@ -1,7 +1,24 @@
 class Test {
-    init() {
-        this.number = 400;
+    class greet() {
+        print "Hello!";
+    }
+
+    class staticSelf() {
+        return this;
+    }
+
+    class init() {
+        print "Static init method called.";
+    }
+
+    init(name) {
+        this.name = name;
+    }
+
+    self() {
+        return this;
     }
 }
 
-print Test().number;
+print Test.staticSelf();
+print Test("Pete").self();
