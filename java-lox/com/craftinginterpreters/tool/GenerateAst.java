@@ -21,6 +21,9 @@ public class GenerateAst {
                 "Logical : Expr left, Token operator, Expr right",
                 "Unary : Token operator, Expr right",
                 "Call : Expr callee, Token paren, List<Expr> arguments",
+                "Get : Expr object, Token name",
+                "Set : Expr object, Token name, Expr value",
+                "This : Token keyword",
                 "Variable : Token name"));
 
         defineAst(outputDir, "Stmt", Arrays.asList(
@@ -31,7 +34,8 @@ public class GenerateAst {
                 "Var : Token name, Expr initializer",
                 "Function : Token name, List<Token> params, List<Stmt> body",
                 "Print : Expr expression",
-                "Return : Token keyword, Expr value"));
+                "Return : Token keyword, Expr value",
+                "Class : Token name, List<Stmt.Function> methods"));
     }
 
     private static void defineAst(String outputDir, String baseName, List<String> types) throws IOException {

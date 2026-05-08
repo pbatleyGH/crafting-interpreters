@@ -103,6 +103,48 @@ abstract class Expr {
       return visitor.visitCallExpr(this);
     }
   }
+  static class Get extends Expr {
+    Get(Expr object, Token name) {
+      this.object = object;
+      this.name = name;
+    }
+
+    final Expr object;
+    final Token name;
+
+    @Override
+    <R> R accept(Visitor<R> visitor) {
+      return visitor.visitGetExpr(this);
+    }
+  }
+  static class Set extends Expr {
+    Set(Expr object, Token name, Expr value) {
+      this.object = object;
+      this.name = name;
+      this.value = value;
+    }
+
+    final Expr object;
+    final Token name;
+    final Expr value;
+
+    @Override
+    <R> R accept(Visitor<R> visitor) {
+      return visitor.visitSetExpr(this);
+    }
+  }
+  static class This extends Expr {
+    This(Token keyword) {
+      this.keyword = keyword;
+    }
+
+    final Token keyword;
+
+    @Override
+    <R> R accept(Visitor<R> visitor) {
+      return visitor.visitThisExpr(this);
+    }
+  }
   static class Variable extends Expr {
     Variable(Token name) {
       this.name = name;
@@ -123,6 +165,9 @@ abstract class Expr {
     R visitLogicalExpr(Logical expr);
     R visitUnaryExpr(Unary expr);
     R visitCallExpr(Call expr);
+    R visitGetExpr(Get expr);
+    R visitSetExpr(Set expr);
+    R visitThisExpr(This expr);
     R visitVariableExpr(Variable expr);
   }
 

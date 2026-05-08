@@ -1,9 +1,12 @@
-{
-  var a = 4;
-  print(a);
+class WHAAAAAT {
+  getCallback() {
+    fun localFunction() {
+      print this;
+    }
+
+    return localFunction;
+  }
 }
 
-{
-  var b = a;
-  print(b);
-}
+var callback = WHAAAAAT().getCallback();
+callback();
