@@ -17,6 +17,8 @@ class LoxClass extends LoxInstance implements LoxCallable {
     private final Map<String, LoxFunction> methods;
 
     LoxClass(String name, LoxClass superclass, Map<String, LoxFunction> methods, LoxClass metaclass) {
+        // metaclass is how we create a static instance (LoxInstance) of the class to
+        // provide access to static methods
         super(metaclass);
 
         this.superclass = superclass;
@@ -53,6 +55,10 @@ class LoxClass extends LoxInstance implements LoxCallable {
     LoxFunction findMethod(String name) {
         if (methods.containsKey(name)) {
             return methods.get(name);
+        }
+
+        if (superclass != null) {
+            return superclass.findMethod(name);
         }
 
         return null;

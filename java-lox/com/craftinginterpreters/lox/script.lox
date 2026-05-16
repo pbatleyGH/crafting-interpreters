@@ -1,25 +1,9 @@
-class SuperClass {
-    scramble_name() {}
+class Doughnut {
+  cook() {
+    print "Fry until golden brown.";
+  }
 }
 
-class Person < SuperClass {
-    class greet() {
-        print "Hello!";
-    }
+class BostonCream < Doughnut {}
 
-    init(firstname, surname) {
-        this.firstname = firstname;
-        this.surname = surname;
-    }
-
-    print_name() {
-        print this.firstname + " " + this.surname;
-    }
-}
-
-Person.greet();
-
-var pete = Person("Pete", "Batley");
-pete.print_name();
-
-print Person.scramble_name();
+BostonCream().cook();
